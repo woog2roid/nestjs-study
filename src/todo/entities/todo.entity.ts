@@ -1,8 +1,11 @@
+import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,4 +32,8 @@ export class Todo {
 
   @DeleteDateColumn()
   deletedAt: Date | null;
+
+  @ManyToOne(() => User, (user) => user.todos)
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: User;
 }

@@ -1,8 +1,10 @@
+import { Todo } from 'src/todo/entities/todo.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -26,4 +28,7 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt: Date | null;
+
+  @OneToMany(() => Todo, (todo) => todo.user)
+  todos: Todo[];
 }
