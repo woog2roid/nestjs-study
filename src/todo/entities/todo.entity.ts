@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'todo-study', name: 'todo' })
+@Entity({ schema: 'todo_study', name: 'todo' })
 export class Todo {
   @PrimaryGeneratedColumn({ name: 'id', type: 'int' })
   id: number;
