@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { TodoModule } from './todo/todo.module';
+import { UserModule } from '../user/user.module';
+import { TodoModule } from '../todo/todo.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user/entities/user.entity';
-import { Todo } from './todo/entities/todo.entity';
+import { User } from '../user/entities/user.entity';
+import { Todo } from '../todo/entities/todo.entity';
 
 @Module({
   imports: [
