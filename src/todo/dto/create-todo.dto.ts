@@ -34,5 +34,5 @@ export class CreateTodoDto {
   })
   @IsNotEmpty()
   @IsBoolean()
-  done!: boolean;
+  isDone!: boolean;
 }

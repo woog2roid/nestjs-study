@@ -31,8 +31,8 @@ export class TodoController {
 
   @ApiOperation({ summary: 'id로 할 일 조회하기' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.todoService.findOne(+id);
+  findById(@Param('id') id: string) {
+    return this.todoService.findById(+id);
   }
 
   @ApiOperation({ summary: '할 일 수정하기' })

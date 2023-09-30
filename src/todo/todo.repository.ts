@@ -10,4 +10,8 @@ export class TodoRepository extends Repository<Todo> {
   ) {
     super(repository.target, repository.manager);
   }
+
+  async findById(id: number): Promise<Todo> {
+    return await this.repository.findOne({ where: { id } });
+  }
 }
