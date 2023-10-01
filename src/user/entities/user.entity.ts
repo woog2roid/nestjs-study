@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'todo-study', name: 'user' })
+@Entity({ schema: 'todo_study', name: 'user' })
 export class User {
   @PrimaryColumn({ name: 'id', type: 'varchar', unique: true, length: 30 })
   id: string;
