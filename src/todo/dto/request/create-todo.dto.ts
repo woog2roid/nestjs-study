@@ -7,7 +7,7 @@ import {
   IsNotEmpty,
 } from 'class-validator';
 
-export class CreateTodoDto {
+export class CreateTodoRequestDto {
   @ApiProperty({
     example: '강의 자료 만들기',
     description: '할 일 제목',
