@@ -1,6 +1,17 @@
 # NESTJS-STUDY
+
 > nestJS를 통해 간단한 todo list와 인증을 연습해보기
 
-### 브랜치 
-- branch는 매 수업의 날짜로 지정합니다.
-- main에는 최종본을 저장하고, 1006, 1020... 등의 브랜치에는 해당 수업 내용을 저장합니다.
+## 진행 사항
+
+1. NestJS configuration
+2. NestJS Controller, Service, Repository, DTO을 통한 /todo API 만들기
+
+## 학습 목표
+
+### 이번 강의를 듣고 과제를 한 후, 이 질문에 대답할 수 있어야 합니다.
+
+- nestJS configuration
+- Module, Controller, Service, Repository, DTO에 대한 이해
+- Swagger에 대한 이해
+- ORM에 대한 이해
