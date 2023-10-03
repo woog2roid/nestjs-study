@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
+import { CreateTodoRequestDto } from './dto/request/create-todo.dto';
+import { UpdateTodoRequestDto } from './dto/request/update-todo.dto';
 import { TodoRepository } from './todo.repository';
 import { Todo } from './entities/todo.entity';
 
@@ -9,7 +9,7 @@ export class TodoService {
   constructor(private readonly todoRepository: TodoRepository) {}
 
   /* Todo를 생성 */
-  create(createTodoDto: CreateTodoDto): Promise<Todo> {
+  create(createTodoDto: CreateTodoRequestDto): Promise<Todo> {
     const todo = new Todo();
     todo.title = createTodoDto.title;
     todo.description = createTodoDto.description;
@@ -32,7 +32,7 @@ export class TodoService {
   }
 
   /* id를 통해 특정 Todo를 수정 */
-  async update(id: number, updateTodoDto: UpdateTodoDto): Promise<Todo> {
+  async update(id: number, updateTodoDto: UpdateTodoRequestDto): Promise<Todo> {
     const { title, description, isDone } = updateTodoDto;
     const todo: Todo = await this.findById(id);
 
@@ -46,7 +46,7 @@ export class TodoService {
   /* id를 통해 특정 Todo를 삭제 */
   async deleteById(id: number): Promise<void> {
     await this.findById(id);
-    this.todoRepository.delete(id);
+    this.todoRepository.softDelete(id);
     return;
   }
 }
