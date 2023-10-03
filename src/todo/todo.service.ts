@@ -32,7 +32,10 @@ export class TodoService {
   }
 
   /* id를 통해 특정 Todo를 수정 */
-  async update(id: number, updateTodoDto: UpdateTodoRequestDto): Promise<Todo> {
+  async updateById(
+    id: number,
+    updateTodoDto: UpdateTodoRequestDto,
+  ): Promise<Todo> {
     const { title, description, isDone } = updateTodoDto;
     const todo: Todo = await this.findById(id);
 

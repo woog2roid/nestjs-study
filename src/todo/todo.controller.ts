@@ -16,7 +16,6 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Todo } from './entities/todo.entity';
 import { CreateTodoResponseDto } from './dto/response/create-todo.dto';
 import { FindTodoResponseDto } from './dto/response/find-todo.dto';
 import { UpdateTodoResponseDto } from './dto/response/update-todo.dto';
@@ -32,8 +31,12 @@ export class TodoController {
     type: CreateTodoResponseDto,
   })
   @Post()
-  create(@Body() createTodoDto: CreateTodoRequestDto): Promise<Todo> {
-    return this.todoService.create(createTodoDto);
+  async create(
+    @Body() createTodoDto: CreateTodoRequestDto,
+  ): Promise<CreateTodoResponseDto> {
+    return CreateTodoResponseDto.fromEntity(
+      await this.todoService.create(createTodoDto),
+    );
   }
 
   @ApiOperation({ summary: '할 일 목록 조회하기' })
@@ -42,8 +45,8 @@ export class TodoController {
     type: [FindTodoResponseDto],
   })
   @Get()
-  findAll(): Promise<Todo[]> {
-    return this.todoService.findAll();
+  async findAll(): Promise<FindTodoResponseDto[]> {
+    return FindTodoResponseDto.fromEntities(await this.todoService.findAll());
   }
 
   @ApiOperation({ summary: 'id로 할 일 조회하기' })
@@ -52,8 +55,8 @@ export class TodoController {
     type: FindTodoResponseDto,
   })
   @Get(':id')
-  findById(@Param('id') id: string): Promise<Todo> {
-    return this.todoService.findById(+id);
+  async findById(@Param('id') id: string): Promise<FindTodoResponseDto> {
+    return FindTodoResponseDto.fromEntity(await this.todoService.findById(+id));
   }
 
   @ApiOperation({ summary: '할 일 수정하기' })
@@ -62,17 +65,19 @@ export class TodoController {
     type: UpdateTodoResponseDto,
   })
   @Patch(':id')
-  updateById(
+  async updateById(
     @Param('id') id: string,
     @Body() updateTodoDto: UpdateTodoRequestDto,
   ): Promise<UpdateTodoResponseDto> {
-    return this.todoService.updateById(+id, updateTodoDto);
+    return UpdateTodoResponseDto.fromEntity(
+      await this.todoService.updateById(+id, updateTodoDto),
+    );
   }
 
   @ApiOperation({ summary: '할 일 삭제하기' })
   @ApiOkResponse({ description: '삭제 성공' })
   @Delete(':id')
-  deleteById(@Param('id') id: string): Promise<void> {
+  async deleteById(@Param('id') id: string): Promise<void> {
     return this.todoService.deleteById(+id);
   }
 }
