@@ -19,6 +19,7 @@ import {
 import { CreateTodoResponseDto } from './dto/response/create-todo.dto';
 import { FindTodoResponseDto } from './dto/response/find-todo.dto';
 import { UpdateTodoResponseDto } from './dto/response/update-todo.dto';
+import { Todo } from './entities/todo.entity';
 
 @ApiTags('todo')
 @Controller('todo')
@@ -56,7 +57,9 @@ export class TodoController {
   })
   @Get(':id')
   async findById(@Param('id') id: string): Promise<FindTodoResponseDto> {
-    return FindTodoResponseDto.fromEntity(await this.todoService.findById(+id));
+    await this.todoService.validateExistenceById(+id);
+    const todo: Todo = await this.todoService.findById(+id);
+    return FindTodoResponseDto.fromEntity(todo);
   }
 
   @ApiOperation({ summary: '할 일 수정하기' })
@@ -70,15 +73,19 @@ export class TodoController {
     @Body() updateTodoRequestDto: UpdateTodoRequestDto,
   ): Promise<UpdateTodoResponseDto> {
     UpdateTodoRequestDto.validateEmptyObject(updateTodoRequestDto);
-    return UpdateTodoResponseDto.fromEntity(
-      await this.todoService.updateById(+id, updateTodoRequestDto),
+    await this.todoService.validateExistenceById(+id);
+    const updatedTodo: Todo = await this.todoService.updateById(
+      +id,
+      updateTodoRequestDto,
     );
+    return UpdateTodoResponseDto.fromEntity(updatedTodo);
   }
 
   @ApiOperation({ summary: '할 일 삭제하기' })
   @ApiOkResponse()
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<void> {
+    await this.todoService.validateExistenceById(+id);
     return this.todoService.deleteById(+id);
   }
 }

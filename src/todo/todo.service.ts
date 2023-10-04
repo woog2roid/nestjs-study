@@ -25,9 +25,6 @@ export class TodoService {
   /* id를 통해 특정 Todo를 조회 */
   async findById(id: number): Promise<Todo> {
     const todo: Todo = await this.todoRepository.findById(id);
-    if (todo == null) {
-      throw new NotFoundException(`id가 ${id}인 todo가 없습니다.`);
-    }
     return todo;
   }
 
@@ -37,7 +34,7 @@ export class TodoService {
     updateTodoDto: UpdateTodoRequestDto,
   ): Promise<Todo> {
     const { title, description, isDone } = updateTodoDto;
-    const todo: Todo = await this.findById(id);
+    const todo: Todo = await this.todoRepository.findById(id);
 
     todo.title = title ? title : todo.title;
     todo.description = description ? description : todo.description;
@@ -46,10 +43,17 @@ export class TodoService {
     return this.todoRepository.save(todo);
   }
 
-  /* id를 통해 특정 Todo를 삭제 */
+  /* id를 통해 특정 Todo를 (논리적) 삭제 */
   async deleteById(id: number): Promise<void> {
-    await this.findById(id);
     this.todoRepository.softDelete(id);
     return;
+  }
+
+  /* 특정 id가 실제로 존재하는지 검증*/
+  async validateExistenceById(id: number): Promise<void> {
+    const todo: Todo = await this.todoRepository.findById(id);
+    if (todo == null) {
+      throw new NotFoundException(`id가 ${id}인 todo가 없습니다.`);
+    }
   }
 }
