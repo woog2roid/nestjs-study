@@ -8,36 +8,24 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { JoinRequestDto } from './dto/request/join.dto';
+import { ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiOperation({ summary: '회원가입' })
+  @ApiCreatedResponse({})
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  async join(@Body() joinRequestDto: JoinRequestDto): Promise<void> {
+    return this.userService.join(joinRequestDto);
   }
 
   /*
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-  */
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async delete(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
+  */
 }
