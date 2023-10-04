@@ -41,7 +41,7 @@ export class TodoController {
 
   @ApiOperation({ summary: '할 일 목록 조회하기' })
   @ApiOkResponse({
-    description: '요청한 할 일 목록',
+    description: '검색 요청한 할 일 목록',
     type: [FindTodoResponseDto],
   })
   @Get()
@@ -51,7 +51,7 @@ export class TodoController {
 
   @ApiOperation({ summary: 'id로 할 일 조회하기' })
   @ApiOkResponse({
-    description: '요청한 할 일',
+    description: '검색 요청한 할 일',
     type: FindTodoResponseDto,
   })
   @Get(':id')
@@ -61,7 +61,7 @@ export class TodoController {
 
   @ApiOperation({ summary: '할 일 수정하기' })
   @ApiOkResponse({
-    description: '수정된 할 일',
+    description: '수정된 할 일 결과물',
     type: UpdateTodoResponseDto,
   })
   @Patch(':id')
@@ -76,7 +76,7 @@ export class TodoController {
   }
 
   @ApiOperation({ summary: '할 일 삭제하기' })
-  @ApiOkResponse({ description: '삭제 성공' })
+  @ApiOkResponse()
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<void> {
     return this.todoService.deleteById(+id);
