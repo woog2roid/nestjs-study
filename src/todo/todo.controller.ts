@@ -27,21 +27,21 @@ export class TodoController {
 
   @ApiOperation({ summary: '할 일 생성하기' })
   @ApiCreatedResponse({
-    description: '생성 성공',
+    description: '생성된 할 일',
     type: CreateTodoResponseDto,
   })
   @Post()
   async create(
-    @Body() createTodoDto: CreateTodoRequestDto,
+    @Body() createRequestTodoDto: CreateTodoRequestDto,
   ): Promise<CreateTodoResponseDto> {
     return CreateTodoResponseDto.fromEntity(
-      await this.todoService.create(createTodoDto),
+      await this.todoService.create(createRequestTodoDto),
     );
   }
 
   @ApiOperation({ summary: '할 일 목록 조회하기' })
   @ApiOkResponse({
-    description: '조회 성공',
+    description: '요청한 할 일 목록',
     type: [FindTodoResponseDto],
   })
   @Get()
@@ -51,7 +51,7 @@ export class TodoController {
 
   @ApiOperation({ summary: 'id로 할 일 조회하기' })
   @ApiOkResponse({
-    description: '조회 성공',
+    description: '요청한 할 일',
     type: FindTodoResponseDto,
   })
   @Get(':id')
@@ -61,16 +61,17 @@ export class TodoController {
 
   @ApiOperation({ summary: '할 일 수정하기' })
   @ApiOkResponse({
-    description: '수정 성공',
+    description: '수정된 할 일',
     type: UpdateTodoResponseDto,
   })
   @Patch(':id')
   async updateById(
     @Param('id') id: string,
-    @Body() updateTodoDto: UpdateTodoRequestDto,
+    @Body() updateTodoRequestDto: UpdateTodoRequestDto,
   ): Promise<UpdateTodoResponseDto> {
+    UpdateTodoRequestDto.validateEmptyObject(updateTodoRequestDto);
     return UpdateTodoResponseDto.fromEntity(
-      await this.todoService.updateById(+id, updateTodoDto),
+      await this.todoService.updateById(+id, updateTodoRequestDto),
     );
   }
 

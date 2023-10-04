@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 import {
   IsString,
   IsBoolean,
@@ -6,32 +6,25 @@ import {
   MinLength,
   IsNotEmpty,
 } from 'class-validator';
+import { Todo } from 'src/todo/entities/todo.entity';
 
-export class CreateTodoRequestDto {
-  @ApiProperty({
-    example: '강의 자료 만들기',
-    description: '할 일 제목',
-  })
+export class CreateTodoRequestDto extends PickType(Todo, [
+  'title',
+  'description',
+  'isDone',
+]) {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
   @MaxLength(100)
   title!: string;
 
-  @ApiProperty({
-    example: 'GDSC KOREA UNIV. BackEnd STUDY',
-    description: '할 일 설명',
-  })
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
   @MaxLength(100)
   description!: string;
 
-  @ApiProperty({
-    example: false,
-    description: '할 일 완료 여부',
-  })
   @IsNotEmpty()
   @IsBoolean()
   isDone!: boolean;
