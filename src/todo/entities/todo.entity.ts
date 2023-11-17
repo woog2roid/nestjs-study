@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -43,8 +42,4 @@ export class Todo {
   @ApiProperty({ example: null, description: '삭제일' })
   @DeleteDateColumn()
   deletedAt: Date | null;
-
-  @ManyToOne(() => User, (user) => user.todos)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  user: User;
 }
