@@ -57,7 +57,7 @@ export class TodoController {
   })
   @Get(':id')
   async findById(@Param('id') id: string): Promise<FindTodoResponseDto> {
-    await this.todoService.validateExistenceById(+id);
+    // await this.todoService.validateExistenceById(+id);
     const todo: Todo = await this.todoService.findById(+id);
     return FindTodoResponseDto.fromEntity(todo);
   }
@@ -73,7 +73,7 @@ export class TodoController {
     @Body() updateTodoRequestDto: UpdateTodoRequestDto,
   ): Promise<UpdateTodoResponseDto> {
     UpdateTodoRequestDto.validateEmptyObject(updateTodoRequestDto);
-    await this.todoService.validateExistenceById(+id);
+    // await this.todoService.validateExistenceById(+id);
     const updatedTodo: Todo = await this.todoService.updateById(
       +id,
       updateTodoRequestDto,
@@ -85,7 +85,7 @@ export class TodoController {
   @ApiOkResponse()
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<void> {
-    await this.todoService.validateExistenceById(+id);
+    // await this.todoService.validateExistenceById(+id);
     return this.todoService.deleteById(+id);
   }
 }
