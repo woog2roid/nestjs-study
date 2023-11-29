@@ -1,7 +1,5 @@
 # NESTJS-STUDY
 
-> nestJS를 통해 간단한 todo list와 인증을 연습해보기
-
 ## 진행 사항
 
 - Controller, Service, Repository에 대한 이해 (이론)
