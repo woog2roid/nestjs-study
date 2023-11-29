@@ -1,7 +1,5 @@
 # NESTJS-STUDY
 
-> nestJS를 통해 간단한 todo list와 인증을 연습해보기
-
 ## 진행 사항
 
 1. 로컬에 MySQL / NodeJS 설치 등 기본 환경 설정
