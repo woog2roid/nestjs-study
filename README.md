@@ -1,6 +1,9 @@
 # NESTJS-STUDY
-> nestJS를 통해 간단한 todo list와 인증을 연습해보기
 
-### 브랜치 
-- branch는 매 수업의 날짜로 지정합니다.
-- main에는 최종본을 저장하고, 1006, 1020... 등의 브랜치에는 해당 수업 내용을 저장합니다.
+## 진행 사항
+
+- Module, Controller, Service, Repository에 대한 이해를 바탕으로 실습
+
+## 과제
+
+- DB에 diary 테이블을 생성하고, CRUD 작업을 하는 API 엔드포인트를 개설할 것
