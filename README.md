@@ -12,4 +12,3 @@
 - [10.27](https://github.com/woog2roid/nestjs-study/tree/10.27)
 - [11.10](https://github.com/woog2roid/nestjs-study/tree/11.10)
 - [11.17](https://github.com/woog2roid/nestjs-study/tree/11.17)
-- [12.01](https://github.com/woog2roid/nestjs-study/tree/12.01)
